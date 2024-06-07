@@ -42,10 +42,7 @@ jobs:
           node-version: '18.x'
       - name: Install Dependencies
         run: npm install
-        working-directory: ./backend
-      - name: Build Project
-        run: npm run build
-        working-directory: ./backend
+        working-directory: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
       - name: Deploy To Azure
         uses: azure/webapps-deploy@v2
         with:
