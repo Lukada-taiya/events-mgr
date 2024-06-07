@@ -1,10 +1,10 @@
-import "./App.css";
+import { LandingPage } from "./Pages/Landingpage/landingPage";
 
 function App() {
   return (
-    <>
-      <h1 className="font-bold text-3xl font-mono">{"hii i am _blank "}</h1>
-    </>
+    <main className="w-full h-full">
+      <LandingPage/>
+    </main>
   );
 }
 
