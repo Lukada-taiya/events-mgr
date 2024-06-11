@@ -38,7 +38,7 @@ To run the frontend, navigate to the frontend folder and run:
 
 > npm install
 >
-> npm start
+> npm run watch
 
 
 You can log into the admin dashboard with these credentials
