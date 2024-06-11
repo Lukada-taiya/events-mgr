@@ -2,6 +2,10 @@
 
 EventsMgr is a events plannng app, to manage and organize your events
 
+Live Demo: [Events App](https://events-mgr.vercel.app)
+
+Backend Api: [Events API](https://events-mgr.azurewebsites.net/)
+
 #### Technologies
 - Node.js
 - React
@@ -39,13 +43,6 @@ To run the frontend, navigate to the frontend folder and run:
 > npm install
 >
 > npm run watch
-
-
-You can log into the admin dashboard with these credentials
-
-Email: admin@eventsmgr.com
-
-Password: P@ssw0rd
 
 
 ### Usage
