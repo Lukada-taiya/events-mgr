@@ -1,11 +1,16 @@
+import jwt from "jsonwebtoken";
+
 import {
   add,
   getIdByEmail,
   getUserByEmail,
   modifyPassword,
+  setUserToken,
 } from "../models/users.model";
 import { User } from "../interfaces/users";
 import { matcher, hasher } from "../helpers/hasher";
+
+let { TOKEN_KEY } = process.env;
 
 export const loginUser = async (req: any, res: any) => {
   try {
@@ -17,6 +22,10 @@ export const loginUser = async (req: any, res: any) => {
     } else {
       const match = matcher(password, results[0].password);
       if (match) {
+        const token = jwt.sign({ id: results[0].id }, TOKEN_KEY as jwt.Secret, {
+          expiresIn: "3h",
+        });
+        await setUserToken(results[0].id, token);
         res.json({
           message: "User registered successfully",
           data: results[0],
@@ -41,6 +50,10 @@ export const registerUser = async (req: any, res: any) => {
     const user = await add(newUser);
     if (user !== undefined) {
       const user_id = await getIdByEmail(newUser.email);
+      const token = jwt.sign({ id: user_id[0].id }, TOKEN_KEY as jwt.Secret, {
+        expiresIn: "3h",
+      }); 
+      await setUserToken(user_id[0].id, token);
       res.json({
         message: "User registered successfully",
         data: user_id[0],
@@ -82,11 +95,11 @@ export const loginOauthUser = async (userModel: any) => {
         isadmin: "0",
         oauth: "1",
       };
-      await add(user);      
-    } 
+      await add(user);
+    }
   } catch (e: any) {
     throw new Error("Unable to authenticate user.");
-  } 
+  }
 };
 export const verifyUser = async (req: any, res: any) => {
   try {
