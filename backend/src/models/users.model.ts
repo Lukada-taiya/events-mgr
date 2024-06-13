@@ -14,7 +14,8 @@ export const update = async (
       "lastname",
       "email",
       "password",
-      "isadmin"
+      "isadmin",
+      'photo'
     )} where id = ${userId}`;
     return await users;
   } catch (error: any) {
@@ -24,7 +25,7 @@ export const update = async (
 
 export const getAll = async (): Promise<postgres.RowList<postgres.Row[]>> => {
   try {
-    const users = sql`SELECT id,firstname,lastname,email,isadmin FROM users`;
+    const users = sql`SELECT id,firstname,lastname,email,photo, isadmin FROM users`;
     return await users;
   } catch (error: any) {
     throw error;
@@ -33,7 +34,7 @@ export const getAll = async (): Promise<postgres.RowList<postgres.Row[]>> => {
 
 export const get = async (id: number) : Promise<postgres.RowList<postgres.Row[]>> => {
     try {
-        const user = sql`SELECT id,firstname,lastname,email,isadmin FROM users WHERE id = ${id}`;
+        const user = sql`SELECT id,firstname,lastname,email,photo, isadmin FROM users WHERE id = ${id}`;
         return await user;
     }catch(error: any) {
         throw error;
@@ -41,7 +42,7 @@ export const get = async (id: number) : Promise<postgres.RowList<postgres.Row[]>
 }
 export const add = async (user: User) : Promise<postgres.RowList<postgres.Row[]>> => {
     try {         
-        const users = sql`INSERT INTO users ${sql(user, 'firstname', 'lastname', 'email','password', 'isadmin')}`; 
+        const users = sql`INSERT INTO users ${sql(user, 'firstname', 'lastname', 'email','password', 'photo', 'isadmin', 'oauth')}`; 
         return await users; 
     }catch(error: any) {
         throw error;
@@ -75,7 +76,7 @@ export const getIdByEmail = async (email: string) : Promise<postgres.RowList<pos
 
 export const getUserByEmail = async (email: string) : Promise<postgres.RowList<postgres.Row[]>> => {
   try {
-      const user = sql`SELECT id,firstname,lastname,email,isadmin FROM users WHERE email = ${email}`;
+      const user = sql`SELECT id,firstname,lastname,email, photo, isadmin FROM users WHERE email = ${email}`;
       return await user;
   }catch(error) {
       throw error;
