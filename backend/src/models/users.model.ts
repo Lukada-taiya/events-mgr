@@ -82,6 +82,22 @@ export const getUserByEmail = async (email: string) : Promise<postgres.RowList<p
       throw error;
   }
 }
+export const setUserToken = async (userId: string, token: string) : Promise<postgres.RowList<postgres.Row[]>> => {
+  try {
+      const user = sql`update users set token_key = ${token} where id = ${userId}`;
+      return await user;
+  }catch(error) {
+      throw error;
+  }
+}
+export const getIdByToken = async (token: string) : Promise<postgres.RowList<postgres.Row[]>> => {
+  try {
+      const user = sql`SELECT id FROM users WHERE token_key = ${token}`;
+      return await user;
+  }catch(error) {
+      throw error;
+  }
+}
 export const modifyPassword = async (newPassword: string, id: number) : Promise<postgres.RowList<postgres.Row[]>> => {
   try {
       const user = sql`update users set password = ${newPassword} where id = ${id}`;
