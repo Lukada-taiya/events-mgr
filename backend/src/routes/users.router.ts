@@ -4,10 +4,10 @@ import isauthenticated from "../middlewares/isauthenticated.middleware";
 
 const userRouter = express.Router();
 
-userRouter.get('/', isauthenticated, getUsers);
-userRouter.get('/:id', isauthenticated, getUser);
-userRouter.post('/', isauthenticated, addUser);
-userRouter.put('/:id', isauthenticated, modifyUser);
-userRouter.delete('/:id', isauthenticated, deleteUser);
+userRouter.get('/', getUsers);
+userRouter.get('/:id', getUser);
+userRouter.post('/', addUser);
+userRouter.put('/:id', modifyUser);
+userRouter.delete('/:id', deleteUser);
 
 export default userRouter;
