@@ -3,6 +3,8 @@ export interface User {
     password: string,
     isadmin: string,
     email: string,
+    photo: string,
     firstname: string,
-    lastname: string
+    lastname: string,
+    oauth: string
 }
