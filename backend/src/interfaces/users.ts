@@ -6,5 +6,6 @@ export interface User {
     photo: string,
     firstname: string,
     lastname: string,
-    oauth: string
+    oauth: string,
+    token_key?: string
 }
