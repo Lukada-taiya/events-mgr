@@ -9,4 +9,18 @@ const cookieSessionMiddleware = cookiesession({
   keys: [COOKIE_KEY_1 as string, COOKIE_KEY_2 as string]
 });
 
-export default cookieSessionMiddleware;
+const cookieSessionBugFix = (request : any, response: any, next : any) => {
+  if (request.session && !request.session.regenerate) {
+      request.session.regenerate = (cb :any) => {
+          cb()
+      }
+  }
+  if (request.session && !request.session.save) {
+      request.session.save = (cb: any) => {
+          cb()
+      }
+  }
+  next()
+}
+
+export {cookieSessionMiddleware, cookieSessionBugFix};
