@@ -11,6 +11,8 @@ import eventsRouter from "./routes/events.router";
 import authRouter from "./routes/auth.router"; 
 import {cookieSessionMiddleware, cookieSessionBugFix} from "./middlewares/cookiesession.middleware";
 import isauthenticated from "./middlewares/isauthenticated.middleware";
+import swaggerUi from 'swagger-ui-express'
+import swaggerSpec from './middlewares/swagger.middleware'
 
 let { PORT } = process.env;
 
@@ -24,9 +26,11 @@ app.use(cookieSessionBugFix);
 app.use(passport.initialize());
 app.use(passport.session());
 
+
 app.get("/", (req, res) => { 
     res.json("Welcome to Events Manager System API");
-});
+    });
+app.use('/api', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use('/auth', authRouter);
 app.use('/users', passport.authenticate('bearer', { session: false }), isauthenticated, userRouter);

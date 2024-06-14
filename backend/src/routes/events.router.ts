@@ -5,6 +5,18 @@ import passport from 'passport';
 
 const eventsRouter = express.Router();
 
+/**
+ * @openapi
+ * /events:
+ *   get: 
+ *     tags:
+ *       - AllEvents
+ *     description: Returns all the events related to the logged in user
+ *     responses:
+ *       200:
+ *         description: All events of the user.
+ */
+
 eventsRouter.get('/', getLoggedInUserEvents);
 eventsRouter.get('/all', getEvents);
 eventsRouter.get('/:id', getEvent);
